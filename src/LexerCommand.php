@@ -35,8 +35,7 @@ class LexerCommand extends Command
     {
         $rql = $input->getArgument('rql');
 
-        $style = new OutputFormatterStyle('black', 'yellow');
-        $output->getFormatter()->setStyle('token', $style);
+        $output->getFormatter()->setStyle('token', $this->createTokenOutputStyle());
 
         $lexer = new Lexer();
         $tokenStream = $lexer->tokenize($rql);
@@ -66,5 +65,13 @@ class LexerCommand extends Command
             $tokenStream->next();
         }
         $table->render();
+    }
+
+    /**
+     * @return OutputFormatterStyle
+     */
+    protected function createTokenOutputStyle()
+    {
+        return new OutputFormatterStyle('black', 'yellow');
     }
 }
