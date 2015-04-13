@@ -1,0 +1,14 @@
+{
+  "name": "mrix/rql-command",
+  "keywords": ["rest", "rql", "resource", "query", "language", "parser", "command", "cli"],
+  "license": "MIT",
+  "autoload": {
+    "psr-4": { "Mrix\\Rql\\Command\\": "src/"}
+  },
+  "require": {
+    "php": "~5.5",
+    "mrix/rql-parser": "dev-master",
+    "symfony/console": ">=2.6"
+  },
+  "minimum-stability": "stable"
+}
