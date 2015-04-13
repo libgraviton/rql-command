@@ -11,5 +11,6 @@
     "symfony/var-dumper": ">=2.6",
     "symfony/console": ">=2.6"
   },
+  "bin": ["rql"],
   "minimum-stability": "stable"
 }

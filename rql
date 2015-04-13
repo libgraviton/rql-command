@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+use Mrix\Rql\Command\LexerCommand;
+use Mrix\Rql\Command\ParserCommand;
+use Symfony\Component\Console\Application;
+
+require __DIR__.'/vendor/autoload.php';
+
+$application = new Application();
+$application->add(new LexerCommand);
+$application->add(new ParserCommand);
+$application->run();
