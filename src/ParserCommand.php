@@ -38,11 +38,7 @@ class ParserCommand extends Command
         $lexer = new Lexer();
         $tokenStream = $lexer->tokenize($input->getArgument('rql'));
 
-        $parser = new Parser();
-        $parser->addTokenParser(new TokenParser\SelectTokenParser());
-        $parser->addTokenParser(new TokenParser\QueryTokenParser());
-        $parser->addTokenParser(new TokenParser\SortTokenParser());
-        $parser->addTokenParser(new TokenParser\LimitTokenParser());
+        $parser = Parser::createDefault();
 
         $dumper = new CliDumper();
         $cloner = new VarCloner();
