@@ -4,7 +4,16 @@ use Mrix\Rql\Command\LexerCommand;
 use Mrix\Rql\Command\ParserCommand;
 use Symfony\Component\Console\Application;
 
-require __DIR__.'/vendor/autoload.php';
+$files = [__DIR__ . '/vendor/autoload.php', __DIR__ . '/../../autoload.php'];
+foreach ($files as $file) {
+    if (file_exists($file)) {
+        $loader = require $file;
+        break;
+    }
+}
+if (!$loader) {
+    throw new RuntimeException('vendor/autoload.php could not be found');
+}
 
 $application = new Application();
 $application->add(new LexerCommand);
