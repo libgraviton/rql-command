@@ -6,7 +6,7 @@
     "psr-4": { "Mrix\\Rql\\Command\\": "src/"}
   },
   "require": {
-    "php": "~5.5",
+    "php": ">=5.4",
     "mrix/rql-parser": "dev-master",
     "symfony/var-dumper": ">=2.6",
     "symfony/console": ">=2.6"
