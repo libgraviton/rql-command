@@ -7,7 +7,7 @@
   },
   "require": {
     "php": ">=5.4",
-    "mrix/rql-parser": "dev-master",
+    "mrix/rql-parser": "~0.0",
     "symfony/var-dumper": ">=2.6",
     "symfony/console": ">=2.6"
   },
