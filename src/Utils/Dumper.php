@@ -36,7 +36,7 @@ class Dumper
     {
         return $this->createNode(
             $level,
-            '<block>select</block>',
+            sprintf('<block>%s</block>', $select->getNodeName()),
             array_values(array_map(function ($field) use ($level) {
                 return $this->createNode($level + 1, sprintf('<field>%s</field>', $field));
             }, $select->getFields()))
@@ -59,7 +59,7 @@ class Dumper
 
         return $this->createNode(
             $level,
-            '<block>sort</block>',
+            sprintf('<block>%s</block>', $sort->getNodeName()),
             $nodes
         );
     }
@@ -75,7 +75,7 @@ class Dumper
 
         return $this->createNode(
             $level,
-            '<block>limit</block>',
+            sprintf('<block>%s</block>', $limit->getNodeName()),
             $nodes
         );
     }
@@ -106,7 +106,7 @@ class Dumper
     {
         return $this->createNode(
             $level,
-            sprintf('<operator>%s</operator>', $this->getQueryNodeName($node)),
+            sprintf('<operator>%s</operator>', $node->getNodeName($node)),
             [
                 $this->createNode($level + 1, sprintf('<field>%s</field>', $node->getField())),
                 $this->createNode(
@@ -124,7 +124,7 @@ class Dumper
     {
         return $this->createNode(
             $level,
-            sprintf('<operator>%s</operator>', $this->getQueryNodeName($node)),
+            sprintf('<operator>%s</operator>', $node->getNodeName($node)),
             [
                 $this->createNode($level + 1, sprintf('<field>%s</field>', $node->getField())),
                 $this->createNode($level + 1, $this->dumpValue($node->getValue())),
@@ -136,21 +136,11 @@ class Dumper
     {
         return $this->createNode(
             $level,
-            sprintf('<operator>%s</operator>', $this->getQueryNodeName($node)),
+            sprintf('<operator>%s</operator>', $node->getNodeName($node)),
             array_map(function (Node\AbstractQueryNode $query) use ($level) {
                 return $this->processOperator($query, $level + 1);
             }, $node->getQueries())
         );
-    }
-
-    protected function getQueryNodeName(Node\AbstractQueryNode $node)
-    {
-        $class = get_class($node);
-        if (preg_match('/\\\\(\w+)node$/i', $class, $matches)) {
-            return strtolower($matches[1]);
-        } else {
-            return $class;
-        }
     }
 
     protected function createNode($level, $value, array $children = [])
