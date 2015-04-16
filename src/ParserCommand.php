@@ -5,8 +5,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\VarDumper\Cloner\VarCloner;
-use Symfony\Component\VarDumper\Dumper\CliDumper;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Mrix\Rql\Command\Utils\Dumper;
+use Mrix\Rql\Command\Utils\Renderer;
 use Mrix\Rql\Parser\Lexer;
 use Mrix\Rql\Parser\Parser;
 use Mrix\Rql\Parser\TokenParser;
@@ -35,17 +36,33 @@ class ParserCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->getFormatter()->setStyle('block', new OutputFormatterStyle('green', null, ['bold']));
+        $output->getFormatter()->setStyle('operator', new OutputFormatterStyle('green'));
+        $output->getFormatter()->setStyle('field', new OutputFormatterStyle('cyan'));
+
         $lexer = new Lexer();
         $tokenStream = $lexer->tokenize($input->getArgument('rql'));
 
         $parser = Parser::createDefault();
+        $query = $parser->parse($tokenStream);
 
-        $dumper = new CliDumper();
-        $cloner = new VarCloner();
-        $dumper->dump($cloner->cloneVar($parser->parse($tokenStream)), function ($line, $depth) use ($output) {
-            if ($depth >= 0) {
-                $output->writeln(str_repeat('  ', $depth) . $line);
-            }
-        });
+        $dumper = new Dumper();
+        $renderer = new Renderer();
+        $output->writeln($renderer->render($dumper->createTree($query)));
+    }
+
+    /**
+     * @return OutputFormatterStyle
+     */
+    protected function createOperatorOutputStyle()
+    {
+        return new OutputFormatterStyle('green');
+    }
+
+    /**
+     * @return OutputFormatterStyle
+     */
+    protected function createFieldOutputStyle()
+    {
     }
 }
