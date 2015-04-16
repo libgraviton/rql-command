@@ -154,6 +154,37 @@ class Dumper
 
     protected function dumpValue($value)
     {
-        return var_export($value, true);
+        if ($value === null) {
+            return 'null';
+        } elseif ($value === true) {
+            return 'true';
+        } elseif ($value === false) {
+            return 'false';
+        } elseif (is_int($value) || is_float($value)) {
+            return $this->dumpNumber($value);
+        } elseif (is_string($value)) {
+            return sprintf('"%s"', addcslashes($value, "\0\t\"\$\\"));
+        } elseif ($value instanceof \DateTimeInterface) {
+            return $value->format('c');
+        } elseif (is_array($value)) {
+            return '[' . implode(', ', array_map([$this, 'dumpValue'], $value)) . ']';
+        } else {
+            return (string)$value;
+        }
+    }
+
+    protected function dumpNumber($number)
+    {
+        if (($locale = setlocale(LC_NUMERIC, 0)) !== false) {
+            setlocale(LC_NUMERIC, 'C');
+        }
+
+        $result = (string)$number;
+
+        if ($locale !== false) {
+            setlocale(LC_NUMERIC, $locale);
+        }
+
+        return $result;
     }
 }
