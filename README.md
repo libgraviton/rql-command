@@ -24,7 +24,7 @@ Usage
 ### Lexer command ###
 
 ```
-./vendor/bin/rql rql:lexer '(eq(a,1)|lt(b,2)|(c=string:3))'
+./vendor/bin/rql rql:lexer '(eq(a,false)|(c=string:3))&sort(a,+b,-c)&limit(1,2)'
 ```
 
 ![alt tag](https://raw.githubusercontent.com/mrix/rql-command/master/resources/example-lexer.png)
@@ -33,7 +33,7 @@ Usage
 ### Parser command ###
 
 ```
-./vendor/bin/rql rql:parser '(eq(a,1)|lt(b,2)|(c=string:3))'
+./vendor/bin/rql rql:parser '(eq(a,false)|(c=string:3)|(d=in=(4,5)&not(e=6)))&sort(a,+b,-c)&limit(1,2)'
 ```
 
 ![alt tag](https://raw.githubusercontent.com/mrix/rql-command/master/resources/example-parser.png)
