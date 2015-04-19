@@ -33,7 +33,7 @@ Usage
 ### Parser command ###
 
 ```
-./vendor/bin/rql rql:parser '(eq(a,false)|(c=string:3)|(d=in=(4,5)&not(e=6)))&sort(a,+b,-c)&limit(1,2)'
+./vendor/bin/rql rql:parser '(eq(a,false)|(c=string:3)|(d=in=(4,5)&not(e=6.0))|f>2015-04-19)&like(g,a*ab%2Ac?def)&sort(a,+b,-c)&limit(1,2)'
 ```
 
 ![alt tag](https://raw.githubusercontent.com/mrix/rql-command/master/resources/example-parser.png)
