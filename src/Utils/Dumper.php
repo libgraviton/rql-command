@@ -180,6 +180,9 @@ class Dumper
         }
 
         $result = (string)$number;
+        if (is_float($number) && ctype_digit($result) && strpos($result, '.') === false) {
+            $result = $result . '.0';
+        }
 
         if ($locale !== false) {
             setlocale(LC_NUMERIC, $locale);
