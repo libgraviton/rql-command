@@ -3,6 +3,7 @@ namespace Mrix\Rql\Command\Utils;
 
 use Mrix\Rql\Parser\Query;
 use Mrix\Rql\Parser\Node;
+use Mrix\Rql\Parser\DataType\Glob;
 
 /**
  * @link https://github.com/liushuping/freetree
@@ -166,6 +167,8 @@ class Dumper
             return sprintf('"%s"', addcslashes($value, "\0\t\"\$\\"));
         } elseif ($value instanceof \DateTimeInterface) {
             return $value->format('c');
+        } elseif ($value instanceof Glob) {
+            return $value->toRegex();
         } elseif (is_array($value)) {
             return '[' . implode(', ', array_map([$this, 'dumpValue'], $value)) . ']';
         } else {
