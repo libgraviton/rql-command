@@ -7,7 +7,7 @@
   },
   "require": {
     "php": ">=5.4",
-    "mrix/rql-parser": "~0.4",
+    "mrix/rql-parser": "~0.5",
     "symfony/console": ">=2.6"
   },
   "bin": ["rql"],
