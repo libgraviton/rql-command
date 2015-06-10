@@ -1,5 +1,5 @@
 <?php
-namespace Mrix\Rql\Command\Utils;
+namespace Xiag\Rql\Command\Utils;
 
 /**
  * @link https://github.com/liushuping/ascii-tree

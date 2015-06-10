@@ -1,16 +1,16 @@
 <?php
-namespace Mrix\Rql\Command;
+namespace Xiag\Rql\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use Mrix\Rql\Command\Utils\Dumper;
-use Mrix\Rql\Command\Utils\Renderer;
-use Mrix\Rql\Parser\Lexer;
-use Mrix\Rql\Parser\Parser;
-use Mrix\Rql\Parser\TokenParser;
+use Xiag\Rql\Command\Utils\Dumper;
+use Xiag\Rql\Command\Utils\Renderer;
+use Xiag\Rql\Parser\Lexer;
+use Xiag\Rql\Parser\Parser;
+use Xiag\Rql\Parser\TokenParser;
 
 /**
  */

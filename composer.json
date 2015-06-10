@@ -1,13 +1,13 @@
 {
-  "name": "mrix/rql-command",
+  "name": "xiag/rql-command",
   "keywords": ["rest", "rql", "resource", "query", "language", "parser", "command", "cli"],
   "license": "MIT",
   "autoload": {
-    "psr-4": { "Mrix\\Rql\\Command\\": "src/"}
+    "psr-4": { "Xiag\\Rql\\Command\\": "src/"}
   },
   "require": {
     "php": ">=5.4",
-    "mrix/rql-parser": "~0.6",
+    "xiag/rql-parser": "~1.0",
     "symfony/console": ">=2.6"
   },
   "bin": ["rql"],

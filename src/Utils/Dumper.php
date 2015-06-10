@@ -1,9 +1,9 @@
 <?php
-namespace Mrix\Rql\Command\Utils;
+namespace Xiag\Rql\Command\Utils;
 
-use Mrix\Rql\Parser\Query;
-use Mrix\Rql\Parser\Node;
-use Mrix\Rql\Parser\DataType\Glob;
+use Xiag\Rql\Parser\Query;
+use Xiag\Rql\Parser\Node;
+use Xiag\Rql\Parser\DataType\Glob;
 
 /**
  * @link https://github.com/liushuping/freetree

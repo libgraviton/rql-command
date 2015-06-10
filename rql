@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
-use Mrix\Rql\Command\LexerCommand;
-use Mrix\Rql\Command\ParserCommand;
+use Xiag\Rql\Command\LexerCommand;
+use Xiag\Rql\Command\ParserCommand;
 use Symfony\Component\Console\Application;
 
 $files = [__DIR__ . '/vendor/autoload.php', __DIR__ . '/../../autoload.php'];
