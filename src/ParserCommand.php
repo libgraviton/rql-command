@@ -36,9 +36,9 @@ class ParserCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->getFormatter()->setStyle('block', new OutputFormatterStyle('green', null, ['bold']));
-        $output->getFormatter()->setStyle('operator', new OutputFormatterStyle('green'));
-        $output->getFormatter()->setStyle('field', new OutputFormatterStyle('cyan'));
+        $output->getFormatter()->setStyle('block', $this->getBlockOutputStyle());
+        $output->getFormatter()->setStyle('operator', $this->getOperatorOutputStyle());
+        $output->getFormatter()->setStyle('field', $this->getFieldOutputStyle());
 
         $lexer = new Lexer();
         $tokenStream = $lexer->tokenize($input->getArgument('rql'));
@@ -54,7 +54,15 @@ class ParserCommand extends Command
     /**
      * @return OutputFormatterStyle
      */
-    protected function createOperatorOutputStyle()
+    protected function getBlockOutputStyle()
+    {
+        return new OutputFormatterStyle('green', null, ['bold']);
+    }
+
+    /**
+     * @return OutputFormatterStyle
+     */
+    protected function getOperatorOutputStyle()
     {
         return new OutputFormatterStyle('green');
     }
@@ -62,7 +70,8 @@ class ParserCommand extends Command
     /**
      * @return OutputFormatterStyle
      */
-    protected function createFieldOutputStyle()
+    protected function getFieldOutputStyle()
     {
+        return new OutputFormatterStyle('cyan');
     }
 }
