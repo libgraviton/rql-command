@@ -6,7 +6,7 @@
     "psr-4": { "Xiag\\Rql\\Command\\": "src/"}
   },
   "require": {
-    "php": ">=5.4",
+    "php": ">=5.5",
     "xiag/rql-parser": "~1.0.1",
     "symfony/console": ">=2.6"
   },
