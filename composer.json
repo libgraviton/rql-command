@@ -7,7 +7,7 @@
   },
   "require": {
     "php": ">=5.5",
-    "xiag/rql-parser": "~1.0.1",
+    "xiag/rql-parser": "~2.0.0",
     "symfony/console": ">=2.6"
   },
   "require-dev": {

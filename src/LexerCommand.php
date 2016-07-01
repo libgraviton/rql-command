@@ -48,17 +48,16 @@ class LexerCommand extends Command
         ]);
         while (!$tokenStream->isEnd()) {
             $token = $tokenStream->getCurrent();
-            $next = $tokenStream->lookAhead();
 
             $table->addRow([
                 'token' => $token->getValue(),
                 'type'  => $token->getName(),
                 'text'  => implode('', [
-                    substr($rql, 0, $token->getPosition()),
+                    substr($rql, 0, $token->getStart()),
                     '<token>',
-                    substr($rql, $token->getPosition(), $next->getPosition() - $token->getPosition()),
+                    substr($rql, $token->getStart(), $token->getEnd()- $token->getStart()),
                     '</token>',
-                    substr($rql, $next->getPosition()),
+                    substr($rql, $token->getEnd()),
                 ]),
             ]);
 

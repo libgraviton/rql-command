@@ -10,7 +10,6 @@ use Xiag\Rql\Command\Utils\Dumper;
 use Xiag\Rql\Command\Utils\Renderer;
 use Xiag\Rql\Parser\Lexer;
 use Xiag\Rql\Parser\Parser;
-use Xiag\Rql\Parser\TokenParser;
 
 /**
  */
@@ -43,7 +42,7 @@ class ParserCommand extends Command
         $lexer = new Lexer();
         $tokenStream = $lexer->tokenize($input->getArgument('rql'));
 
-        $parser = Parser::createDefault();
+        $parser = new Parser();
         $query = $parser->parse($tokenStream);
 
         $dumper = new Dumper();

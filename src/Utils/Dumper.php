@@ -3,7 +3,7 @@ namespace Xiag\Rql\Command\Utils;
 
 use Xiag\Rql\Parser\Query;
 use Xiag\Rql\Parser\Node;
-use Xiag\Rql\Parser\DataType\Glob;
+use Xiag\Rql\Parser\Glob;
 
 /**
  * @link https://github.com/liushuping/freetree
@@ -101,8 +101,8 @@ class Dumper
             return $this->processArrayOperator($query, $level);
         } elseif ($query instanceof Node\Query\AbstractScalarOperatorNode) {
             return $this->processScalarOperator($query, $level);
-        } elseif ($query instanceof Node\Query\AbstractLogicOperatorNode) {
-            return $this->processLogicOperator($query, $level);
+        } elseif ($query instanceof Node\Query\AbstractLogicalOperatorNode) {
+            return $this->processLogicalOperator($query, $level);
         }
 
         throw new \InvalidArgumentException(sprintf('Unknown node type "%s"', get_class($query)));
@@ -138,7 +138,7 @@ class Dumper
         );
     }
 
-    protected function processLogicOperator(Node\Query\AbstractLogicOperatorNode $node, $level = 0)
+    protected function processLogicalOperator(Node\Query\AbstractLogicalOperatorNode $node, $level = 0)
     {
         return $this->createNode(
             $level,
@@ -176,7 +176,7 @@ class Dumper
         } elseif ($value instanceof \DateTimeInterface) {
             return $value->format('c');
         } elseif ($value instanceof Glob) {
-            return $value->toRegex();
+            return $value->__toString();
         } elseif (is_array($value)) {
             return '[' . implode(', ', array_map([$this, 'dumpValue'], $value)) . ']';
         } else {
