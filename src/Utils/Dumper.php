@@ -38,9 +38,14 @@ class Dumper
         return $this->createNode(
             $level,
             sprintf('<block>%s</block>', $select->getNodeName()),
-            array_values(array_map(function ($field) use ($level) {
-                return $this->createNode($level + 1, sprintf('<field>%s</field>', $field));
-            }, $select->getFields()))
+            array_values(
+                array_map(
+                    function ($field) use ($level) {
+                        return $this->createNode($level + 1, sprintf('<field>%s</field>', $field));
+                    },
+                    $select->getFields()
+                )
+            )
         );
     }
 
@@ -68,10 +73,10 @@ class Dumper
     protected function processLimit(Node\LimitNode $limit, $level = 0)
     {
         $nodes = [
-            $this->createNode($level + 1 , sprintf('limit: %d', $limit->getLimit())),
+            $this->createNode($level + 1, sprintf('limit: %d', $limit->getLimit())),
         ];
         if ($limit->getOffset() !== null) {
-            $nodes[] = $this->createNode($level + 1 , sprintf('offset: %d', $limit->getOffset()));
+            $nodes[] = $this->createNode($level + 1, sprintf('offset: %d', $limit->getOffset()));
         }
 
         return $this->createNode(
@@ -107,7 +112,7 @@ class Dumper
     {
         return $this->createNode(
             $level,
-            sprintf('<operator>%s</operator>', $node->getNodeName($node)),
+            sprintf('<operator>%s</operator>', $node->getNodeName()),
             [
                 $this->createNode($level + 1, sprintf('<field>%s</field>', $node->getField())),
                 $this->createNode(
@@ -125,7 +130,7 @@ class Dumper
     {
         return $this->createNode(
             $level,
-            sprintf('<operator>%s</operator>', $node->getNodeName($node)),
+            sprintf('<operator>%s</operator>', $node->getNodeName()),
             [
                 $this->createNode($level + 1, sprintf('<field>%s</field>', $node->getField())),
                 $this->createNode($level + 1, $this->dumpValue($node->getValue())),
@@ -137,10 +142,13 @@ class Dumper
     {
         return $this->createNode(
             $level,
-            sprintf('<operator>%s</operator>', $node->getNodeName($node)),
-            array_map(function (Node\AbstractQueryNode $query) use ($level) {
-                return $this->processOperator($query, $level + 1);
-            }, $node->getQueries())
+            sprintf('<operator>%s</operator>', $node->getNodeName()),
+            array_map(
+                function (Node\AbstractQueryNode $query) use ($level) {
+                    return $this->processOperator($query, $level + 1);
+                },
+                $node->getQueries()
+            )
         );
     }
 
